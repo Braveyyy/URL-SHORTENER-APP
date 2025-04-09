@@ -21,15 +21,54 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./URL-SHORTENER-APP/client/urlShortener
 
       - name: Build project
         run: npm run build
+        working-directory: ./URL-SHORTENER-APP/client/urlShortener
 
       - name: Add .nojekyll
-        run: echo > dist/.nojekyll
+        run: echo > URL-SHORTENER-APP/client/urlShortener/dist/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./URL-SHORTENER-APP/client/urlShortener/dist
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./URL-SHORTENER-APP/client/urlShortener
+
+      - name: Build project
+        run: npm run build
+        working-directory: ./URL-SHORTENER-APP/client/urlShortener
+
+      - name: Add .nojekyll
+        run: echo > URL-SHORTENER-APP/client/urlShortener/dist/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./URL-SHORTENER-APP/client/urlShortener/dist
