@@ -21,17 +21,17 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./URL-SHORTENER-APP/client/urlShortener
+        working-directory: ./client/urlShortener
 
       - name: Build project
         run: npm run build
-        working-directory: ./URL-SHORTENER-APP/client/urlShortener
+        working-directory: ./client/urlShortener
 
       - name: Add .nojekyll
-        run: echo > URL-SHORTENER-APP/client/urlShortener/dist/.nojekyll
+        run: echo > client/urlShortener/dist/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./URL-SHORTENER-APP/client/urlShortener/dist
+          publish_dir: ./client/urlShortener/dist
